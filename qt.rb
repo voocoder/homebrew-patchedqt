@@ -116,17 +116,16 @@ end
 
 __END__
 diff --git a/src/sql/drivers/mysql/qsql_mysql.cpp b/src/sql/drivers/mysql/qsql_mysql.cpp
-index 0ecc1ad..5814108 100644
+index 0ecc1ad..5dbfaaf 100644
 --- a/src/sql/drivers/mysql/qsql_mysql.cpp
 +++ b/src/sql/drivers/mysql/qsql_mysql.cpp
 @@ -652,7 +652,8 @@ QVariant QMYSQLResult::data(int field)
-}
- return QVariant(val.toDouble());
- case QVariant::Date:
-      -        return qDateFromString(val);
-     +        //just return qstring, handle possible conversion later (0-Date fix)
-     +        return QVariant(val);
+     }
+         return QVariant(val.toDouble());
+     case QVariant::Date:
+-        return qDateFromString(val);
++        //just return qstring, handle possible conversion later (0-Date fix)
++        return QVariant(val)
      case QVariant::Time:
-            return qTimeFromString(val);
-         case QVariant::DateTime:
-                
+         return qTimeFromString(val);
+     case QVariant::DateTime:
