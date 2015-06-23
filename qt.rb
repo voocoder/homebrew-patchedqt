@@ -129,7 +129,7 @@ index 0ecc1ad..5dbfaaf 100644
      case QVariant::Date:
 -        return qDateFromString(val);
 +        //just return qstring, handle possible conversion later (0-Date fix)
-+        return QVariant(val)
++        return QVariant(val);
      case QVariant::Time:
          return qTimeFromString(val);
      case QVariant::DateTime:
